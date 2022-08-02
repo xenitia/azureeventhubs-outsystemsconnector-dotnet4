@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OutSystems.NssAzureEventHubsSenderExtension2</name>
+    </assembly>
+    <members>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.CssAzureEventHubsSenderExtension2.MssSenderSend(System.String,System.String@)">
+            <summary>
+            Import Details:
+            
+             - Action SenderSend:
+                    Target: Method Send(string, out string)
+                    Declaring Type: ClassLibraryOSTest.Sender
+                    Parameters:
+                        msgIn(Text &lt;- string)
+                        msgOut(Text &lt;- string)
+            </summary>
+            <param name="ssmsgIn"></param>
+            <param name="ssmsgOut"></param>
+        </member>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.IssAzureEventHubsSenderExtension2.MssSenderSend(System.String,System.String@)">
+            <summary>
+            Import Details:
+            
+             - Action SenderSend:
+                    Target: Method Send(string, out string)
+                    Declaring Type: ClassLibraryOSTest.Sender
+                    Parameters:
+                        msgIn(Text &lt;- string)
+                        msgOut(Text &lt;- string)
+            </summary>
+            <param name="ssmsgIn"></param>
+            <param name="ssmsgOut"></param>
+        </member>
+    </members>
+</doc>
