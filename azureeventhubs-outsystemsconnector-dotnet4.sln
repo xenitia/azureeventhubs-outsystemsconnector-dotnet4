@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventHubSender", "EventHubS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventHubReceiver", "EventHubReceiver\EventHubReceiver.csproj", "{30D3BBE5-C6A8-40D5-9F56-5E7509403DDF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventHubSenderClassLibrary", "EventHubSenderClassLibrary\EventHubSenderClassLibrary.csproj", "{79084E07-ABD9-43E5-8333-C80A1E34A0A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibraryOSTest", "ClassLibraryOSTest\ClassLibraryOSTest.csproj", "{57639FA1-0C40-43F3-A437-A80DD7F12422}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{30D3BBE5-C6A8-40D5-9F56-5E7509403DDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30D3BBE5-C6A8-40D5-9F56-5E7509403DDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30D3BBE5-C6A8-40D5-9F56-5E7509403DDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79084E07-ABD9-43E5-8333-C80A1E34A0A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79084E07-ABD9-43E5-8333-C80A1E34A0A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79084E07-ABD9-43E5-8333-C80A1E34A0A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79084E07-ABD9-43E5-8333-C80A1E34A0A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57639FA1-0C40-43F3-A437-A80DD7F12422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57639FA1-0C40-43F3-A437-A80DD7F12422}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57639FA1-0C40-43F3-A437-A80DD7F12422}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57639FA1-0C40-43F3-A437-A80DD7F12422}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

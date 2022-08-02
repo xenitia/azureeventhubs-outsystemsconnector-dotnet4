@@ -3,16 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Azure.Identity;
+
+//using Azure.Identity;
 using Azure.Messaging.EventHubs;
 using Azure.Messaging.EventHubs.Producer;
-using Azure.Security.KeyVault.Secrets;
+//using Azure.Security.KeyVault.Secrets;
 
-namespace AzureEventHubs.OutSystemsConnector.DotNet4
+namespace ClassLibraryOSTest
 {
-    internal class Send
+    public class Sender
     {
-        static SecretClient client = new SecretClient(vaultUri: new Uri("https://eventhubsnskeyvault.vault.azure.net/"), credential: new DefaultAzureCredential());
+        static public void Send(string msgIn, out string msgOut)
+        {
+            EHSend.Init();
+            EHSend.Send(msgIn);
+            msgOut = msgIn + "XENITIA3";
+
+            Task.Delay(5000).Wait();
+          
+        }
+    }
+
+
+
+    static internal class EHSend
+    {
+        //static SecretClient client = new SecretClient(vaultUri: new Uri("https://eventhubsnskeyvault.vault.azure.net/"), credential: new DefaultAzureCredential());
 
         static String eventHubsConnectionString;
         static String eventHubName = "eventhubtopic1";
@@ -21,15 +37,25 @@ namespace AzureEventHubs.OutSystemsConnector.DotNet4
 
         async static Task Main(string[] args)
         {
-            KeyVaultSecret secret = client.GetSecret("eventHubsConnectionString");
-            eventHubsConnectionString = secret.Value;
+            //KeyVaultSecret secret = client.GetSecret("eventHubsConnectionString");
+            //eventHubsConnectionString = secret.Value;
+
+            eventHubsConnectionString = "eventhubabc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=YVZ/vp4y/KZjdPHnazN3eOZGO6I8Mlu/G+Ws60VUK9w=";
             ComputerName = System.Net.Dns.GetHostName();
 
-            await sendMicroBatchPartitionKey();
-            await sendMicroBatchPartitionKey("WOOHOO");
+            await Send();
+            await Send("WOOHOO");
+            //await Send(args[0]);
         }
 
-        public async static Task sendMicroBatchPartitionKey(string message="XENITIA")
+        public static void Init()
+        {
+            eventHubsConnectionString = "eventhubabc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=YVZ/vp4y/KZjdPHnazN3eOZGO6I8Mlu/G+Ws60VUK9w=";
+            ComputerName = System.Net.Dns.GetHostName();
+
+        }
+
+        public async static Task Send(string message = "XENITIA2")
         {
             var producer = new EventHubProducerClient(eventHubsConnectionString, eventHubName);
 

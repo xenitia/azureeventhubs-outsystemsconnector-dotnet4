@@ -1,0 +1,117 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "namespaces_eventhubabc_name": {
+            "defaultValue": "eventhubabc",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.EventHub/namespaces",
+            "apiVersion": "2022-01-01-preview",
+            "name": "[parameters('namespaces_eventhubabc_name')]",
+            "location": "Australia East",
+            "sku": {
+                "name": "Standard",
+                "tier": "Standard",
+                "capacity": 8
+            },
+            "properties": {
+                "minimumTlsVersion": "1.2",
+                "publicNetworkAccess": "Enabled",
+                "disableLocalAuth": false,
+                "zoneRedundant": true,
+                "isAutoInflateEnabled": false,
+                "maximumThroughputUnits": 0,
+                "kafkaEnabled": true
+            }
+        },
+        {
+            "type": "Microsoft.EventHub/namespaces/AuthorizationRules",
+            "apiVersion": "2022-01-01-preview",
+            "name": "[concat(parameters('namespaces_eventhubabc_name'), '/RootManageSharedAccessKey')]",
+            "location": "Australia East",
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_eventhubabc_name'))]"
+            ],
+            "properties": {
+                "rights": [
+                    "Listen",
+                    "Manage",
+                    "Send"
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.EventHub/namespaces/eventhubs",
+            "apiVersion": "2022-01-01-preview",
+            "name": "[concat(parameters('namespaces_eventhubabc_name'), '/eventhubtopic1')]",
+            "location": "australiaeast",
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_eventhubabc_name'))]"
+            ],
+            "properties": {
+                "messageRetentionInDays": 1,
+                "partitionCount": 8,
+                "status": "Active"
+            }
+        },
+        {
+            "type": "Microsoft.EventHub/namespaces/networkRuleSets",
+            "apiVersion": "2022-01-01-preview",
+            "name": "[concat(parameters('namespaces_eventhubabc_name'), '/default')]",
+            "location": "Australia East",
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_eventhubabc_name'))]"
+            ],
+            "properties": {
+                "publicNetworkAccess": "Enabled",
+                "defaultAction": "Allow",
+                "virtualNetworkRules": [],
+                "ipRules": []
+            }
+        },
+        {
+            "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationrules",
+            "apiVersion": "2022-01-01-preview",
+            "name": "[concat(parameters('namespaces_eventhubabc_name'), '/eventhubtopic1/PreviewDataPolicy')]",
+            "location": "australiaeast",
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('namespaces_eventhubabc_name'), 'eventhubtopic1')]",
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_eventhubabc_name'))]"
+            ],
+            "properties": {
+                "rights": [
+                    "Listen"
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.EventHub/namespaces/eventhubs/consumergroups",
+            "apiVersion": "2022-01-01-preview",
+            "name": "[concat(parameters('namespaces_eventhubabc_name'), '/eventhubtopic1/$Default')]",
+            "location": "australiaeast",
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('namespaces_eventhubabc_name'), 'eventhubtopic1')]",
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_eventhubabc_name'))]"
+            ],
+            "properties": {
+                "userMetadata": "$Default"
+            }
+        },
+        {
+            "type": "Microsoft.EventHub/namespaces/eventhubs/consumergroups",
+            "apiVersion": "2022-01-01-preview",
+            "name": "[concat(parameters('namespaces_eventhubabc_name'), '/eventhubtopic1/preview_data_consumer_group')]",
+            "location": "australiaeast",
+            "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('namespaces_eventhubabc_name'), 'eventhubtopic1')]",
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_eventhubabc_name'))]"
+            ],
+            "properties": {}
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+A) - Top level config - is this useless?
+1) Select AZ resource from Azure extension
+2) select resource 
+3) ctrl+shift+p -> bicep: Inset resource
+
+
+B) - Detailed Bicep file (from deployed ARM template)
+1) as per above or directly from portal get template file contents for resource, save to a file
+2) run command:
+
+    az bicep decompile --file <saved file>.json
+
+    as per:  https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/decompile?tabs=azure-cli
+    ... this generates the corresponding <saved file>.bicep file
+
+
+C) - Tarrafy - https://techcommunity.microsoft.com/t5/itops-talk-blog/azure-terrafy-import-your-existing-azure-infrastructure-into/ba-p/3357653
+...doesn't seem to work well???
+supposed to generate terraform scripts from Azure resources  

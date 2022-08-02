@@ -25,11 +25,11 @@ namespace AzureEventHubs.OutSystemsConnector.DotNet4
             eventHubsConnectionString = secret.Value;
             ComputerName = System.Net.Dns.GetHostName();
 
-            await sendMicroBatchPartitionKey();
-            await sendMicroBatchPartitionKey("WOOHOO");
+            await send();
+            await send("WOOHOO");
         }
 
-        public async static Task sendMicroBatchPartitionKey(string message="XENITIA")
+        public async static Task send(string message="XENITIA")
         {
             var producer = new EventHubProducerClient(eventHubsConnectionString, eventHubName);
 
