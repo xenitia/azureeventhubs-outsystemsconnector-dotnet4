@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-//using System.Threading.Tasks;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -33,6 +33,15 @@ namespace WindowsFormsApp1
 
             ////string ssmsgOut = ssmsgOutTask.Result;
             //string ssmsgOut = await ssmsgOutTask;
+
+        }
+
+        async private void button2_Click(object sender, EventArgs e)
+        {
+            Task<string> rsTask= AzureEventHubs.OutSystemsConnector.DotNet4.Sender.Send2("Hello Azure Event Hubs!");
+
+           // string rs= await rsTask;
+
 
         }
     }

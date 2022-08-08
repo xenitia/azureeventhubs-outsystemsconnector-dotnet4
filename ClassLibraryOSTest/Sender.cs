@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+//using System.Threading.Tasks;
 
 //using Azure.Identity;
 using Azure.Messaging.EventHubs;
@@ -18,7 +18,7 @@ namespace ClassLibraryOSTest
             EHSend.Init();
             EHSend.Send(msgIn);
             msgOut = msgIn + "XENITIA5";
-            EHSend.Send(msgOut); //.Wait();
+            //EHSend.Send(msgOut); //.Wait();
 
             //Task.Delay(5000).Wait();
 
@@ -36,6 +36,17 @@ namespace ClassLibraryOSTest
         //    //Task.Delay(5000).Wait();
 
         //}
+
+        static public void Send3(string BusinessEvent, string msgIn, out string msgOut)
+        {
+            EHSend.Init();
+            EHSend.Send(BusinessEvent, msgIn);
+            msgOut = msgIn + "XENITIA5";
+            //EHSend.Send(msgOut); //.Wait();
+
+            //Task.Delay(5000).Wait();
+
+        }
 
 
     }
@@ -79,7 +90,7 @@ namespace ClassLibraryOSTest
         }
 
         //public async static Task Send(string message = "XENITIA4")
-        public static void Send(string message = "XENITIA4")
+        public static void Send(string BusinessEvent="DefaultBusinessEvent",string message = "XENITIA4")
         {
             var producer = new EventHubProducerClient(eventHubsConnectionString, eventHubName);
 
@@ -111,6 +122,7 @@ namespace ClassLibraryOSTest
                         eventData = new EventData($"PartitionKey:{batchOptions.PartitionKey} ** InputData {message} ** Host:{ComputerName}Event #{counter}:{index} Id:{Guid.NewGuid()} Timestamp:{DateTime.Now.ToString()}");
                         eventData.MessageId = Guid.NewGuid().ToString();
                         eventData.CorrelationId = Guid.NewGuid().ToString();
+                        eventData.Properties.Add("BusinessEvent", BusinessEvent);
 
                         Console.WriteLine($"PRE: Adding to Micro Batch Payload: Event to partitionKey: {batchOptions.PartitionKey} with length {eventData.EventBody.ToArray().Length}, eventBody = {eventData.EventBody}.");
 

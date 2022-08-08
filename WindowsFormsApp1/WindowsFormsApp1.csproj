@@ -84,6 +84,10 @@
       <Project>{57639fa1-0c40-43f3-a437-a80dd7f12422}</Project>
       <Name>ClassLibraryOSTest</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EventHubSenderClassLibrary\EventHubSenderClassLibrary.csproj">
+      <Project>{79084e07-abd9-43e5-8333-c80a1e34a0a3}</Project>
+      <Name>EventHubSenderClassLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,7 +7,32 @@ using System.Threading.Tasks;
 
 namespace AzureEventHubs.OutSystemsConnector.DotNet4
 {
-    internal class Send
+
+    public class Sender
+    {
+        //static public void Send(string msgIn, out string msgOut)
+        //{
+        //    EHSend.Init();
+        //    EHSend.Send(msgIn);
+        //    msgOut = msgIn + "XENITIA5";
+        //    EHSend.Send(msgOut); //.Wait();
+
+        //    //Task.Delay(5000).Wait();
+
+        //}
+
+        async static public Task<String> Send2(string msgIn)
+        {
+            Send.Init();
+            await Send.send(msgIn);
+            await Send.send(msgIn);
+            return msgIn + "XENITIA";
+        }
+
+
+    }
+
+    public class Send
     {
         static SecretClient client = new SecretClient(vaultUri: new Uri("https://eventhubsnskeyvault.vault.azure.net/"), credential: new DefaultAzureCredential());
 
@@ -15,6 +40,9 @@ namespace AzureEventHubs.OutSystemsConnector.DotNet4
         static String eventHubName = "eventhubtopic1";
         static int batchSize = 1; //1, 10, 1000, 5000
         static string ComputerName = System.Net.Dns.GetHostName();
+
+        static bool isInitialised = false;
+
 
         async static Task Main(string[] args)
         {
@@ -24,6 +52,19 @@ namespace AzureEventHubs.OutSystemsConnector.DotNet4
 
             await send();
             await send("WOOHOO");
+        }
+
+
+        public static void Init()
+        {
+            if (!isInitialised)
+            {
+                KeyVaultSecret secret = client.GetSecret("eventHubsConnectionString");
+                eventHubsConnectionString = secret.Value;
+                ComputerName = System.Net.Dns.GetHostName();
+
+                isInitialised = true;
+            }
         }
 
         public async static Task send(string message = "XENITIA")
