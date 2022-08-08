@@ -25,8 +25,11 @@ namespace AzureEventHubs.OutSystemsConnector.DotNet4
             eventHubsConnectionString = secret.Value;
             ComputerName = System.Net.Dns.GetHostName();
 
-            await sendMicroBatchPartitionKey();
-            await sendMicroBatchPartitionKey("WOOHOO");
+            sendMicroBatchPartitionKey().Wait();
+            sendMicroBatchPartitionKey("WOOHOO").Wait();
+
+            //await sendMicroBatchPartitionKey();
+            //await sendMicroBatchPartitionKey("WOOHOO");
         }
 
         public async static Task sendMicroBatchPartitionKey(string message="XENITIA")

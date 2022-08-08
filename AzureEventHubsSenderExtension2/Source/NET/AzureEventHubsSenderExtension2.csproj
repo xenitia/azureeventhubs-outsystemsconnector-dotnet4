@@ -37,7 +37,7 @@
   <ItemGroup>
     <Reference Include="ClassLibraryOSTest, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\azureeventhubs-outsystemsconnector-dotnet4\ClassLibraryOSTest\bin\Release\ClassLibraryOSTest.dll</HintPath>
+      <HintPath>..\..\..\ClassLibraryOSTest\bin\Release\ClassLibraryOSTest.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -88,11 +88,6 @@
     <!-- DO NOT REMOVE THIS COMMENT: ADD_NEW_PROJECT -->
     <Reference Include="mscorlib">
       <Name>mscorlib</Name>
-    </Reference>
-    <Reference Include="ClassLibraryOSTest.dll">
-      <Name>ClassLibraryOSTest.dll</Name>
-      <HintPath>Bin\ClassLibraryOSTest.dll</HintPath>
-      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>

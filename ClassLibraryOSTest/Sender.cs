@@ -17,11 +17,27 @@ namespace ClassLibraryOSTest
         {
             EHSend.Init();
             EHSend.Send(msgIn);
-            msgOut = msgIn + "XENITIA3";
+            msgOut = msgIn + "XENITIA5";
+            EHSend.Send(msgOut); //.Wait();
 
-            Task.Delay(5000).Wait();
-          
+            //Task.Delay(5000).Wait();
+
         }
+
+        //async static public Task<String> Send2(string msgIn)
+        //{
+        //    EHSend.Init();
+        //    EHSend.Send(msgIn);
+        //    //await EHSend.Send(msgIn);
+        //    return msgIn + "XENITIA4";
+        //    //msgOut = msgIn + "XENITIA4";
+        //    //await EHSend.Send(msgOut); //.Wait();
+
+        //    //Task.Delay(5000).Wait();
+
+        //}
+
+
     }
 
 
@@ -35,27 +51,35 @@ namespace ClassLibraryOSTest
         static int batchSize = 1; //1, 10, 1000, 5000
         static string ComputerName = System.Net.Dns.GetHostName();
 
-        async static Task Main(string[] args)
+        static bool isInitialised = false;
+
+        //async static Task Main(string[] args)
+        static void Main(string[] args)
         {
             //KeyVaultSecret secret = client.GetSecret("eventHubsConnectionString");
             //eventHubsConnectionString = secret.Value;
 
-            eventHubsConnectionString = "eventhubabc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=YVZ/vp4y/KZjdPHnazN3eOZGO6I8Mlu/G+Ws60VUK9w=";
+            eventHubsConnectionString = "Endpoint=sb://eventhubabc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=YVZ/vp4y/KZjdPHnazN3eOZGO6I8Mlu/G+Ws60VUK9w=";
             ComputerName = System.Net.Dns.GetHostName();
+            Send();
 
-            await Send();
-            await Send("WOOHOO");
+            //await Send();
+            //await Send("WOOHOO");
             //await Send(args[0]);
         }
 
         public static void Init()
         {
-            eventHubsConnectionString = "eventhubabc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=YVZ/vp4y/KZjdPHnazN3eOZGO6I8Mlu/G+Ws60VUK9w=";
-            ComputerName = System.Net.Dns.GetHostName();
-
+            if (!isInitialised)
+            {
+                eventHubsConnectionString = "Endpoint=sb://eventhubabc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=YVZ/vp4y/KZjdPHnazN3eOZGO6I8Mlu/G+Ws60VUK9w=";
+                ComputerName = System.Net.Dns.GetHostName();
+                isInitialised = true;
+            }
         }
 
-        public async static Task Send(string message = "XENITIA2")
+        //public async static Task Send(string message = "XENITIA4")
+        public static void Send(string message = "XENITIA4")
         {
             var producer = new EventHubProducerClient(eventHubsConnectionString, eventHubName);
 
@@ -77,8 +101,8 @@ namespace ClassLibraryOSTest
                 for (var counter = 0; counter < 1; ++counter)
 
                 {
-                    //producer = new EventHubProducerClient(connectionString, eventHubName);
-                    EventDataBatch eventBatch = await producer.CreateBatchAsync(batchOptions);
+                    //EventDataBatch eventBatch = await producer.CreateBatchAsync(batchOptions);
+                    EventDataBatch eventBatch = producer.CreateBatchAsync(batchOptions).Result;
                     var eventData = new EventData();
 
                     for (var index = 0; index < batchSize; ++index)
@@ -99,7 +123,8 @@ namespace ClassLibraryOSTest
 
                     }
                     //Thread.Sleep(3000);
-                    await producer.SendAsync(eventBatch);
+                    //await producer.SendAsync(eventBatch);
+                    producer.SendAsync(eventBatch).Wait();
                     //Thread.Sleep(3000);
                     Console.WriteLine($"POST: Sent Micro Batch Payload."); // Event to partitionKey: {batchOptions.PartitionKey} with length {eventData.EventBody.ToArray().Length}, eventBody = {eventData.EventBody}.");
 
@@ -117,7 +142,8 @@ namespace ClassLibraryOSTest
             }
             finally
             {
-                await producer.CloseAsync();
+                //await producer.CloseAsync();
+                producer.CloseAsync().Wait();
             }
         }
     }
