@@ -4,6 +4,12 @@
         <name>OutSystems.NssAzureEventHubsSenderExtension2</name>
     </assembly>
     <members>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.CssAzureEventHubsSenderExtension2.MssSendMultiple(OutSystems.NssAzureEventHubsSenderExtension2.RLEventsRecordList,System.String@)">
+            <summary>
+            
+            </summary>
+            <param name="ssBusinessEvent"></param>
+        </member>
         <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.CssAzureEventHubsSenderExtension2.MssSenderSend3(System.String,System.String,System.String@)">
             <summary>
             
@@ -47,6 +53,99 @@
             <param name="ssBusinessEvent"></param>
             <param name="ssmsgIn1"></param>
             <param name="ssmsgOut"></param>
+        </member>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.IssAzureEventHubsSenderExtension2.MssSendMultiple(OutSystems.NssAzureEventHubsSenderExtension2.RLEventsRecordList,System.String@)">
+            <summary>
+            
+            </summary>
+            <param name="ssBusinessEvent"></param>
+            <param name="ssmsgOut"></param>
+        </member>
+        <member name="T:OutSystems.NssAzureEventHubsSenderExtension2.STEventsStructure">
+            <summary>
+            Structure <code>STEventsStructure</code> that represents the Service Studio structure
+             <code>Events</code> <p> Description: </p>
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.STEventsStructure.Read(System.Data.IDataReader,System.Int32@)">
+            <summary>
+            Read a record from database
+            </summary>
+            <param name="r"> Data base reader</param>
+            <param name="index"> index</param>
+        </member>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.STEventsStructure.ReadDB(System.Data.IDataReader)">
+            <summary>
+            Read from database
+            </summary>
+            <param name="r"> Data reader</param>
+        </member>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.STEventsStructure.ReadIM(OutSystems.NssAzureEventHubsSenderExtension2.STEventsStructure)">
+            <summary>
+            Read from record
+            </summary>
+            <param name="r"> Record</param>
+        </member>
+        <member name="T:OutSystems.NssAzureEventHubsSenderExtension2.RCEventsRecord">
+            <summary>
+            Structure <code>RCEventsRecord</code>
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.RCEventsRecord.Read(System.Data.IDataReader,System.Int32@)">
+            <summary>
+            Read a record from database
+            </summary>
+            <param name="r"> Data base reader</param>
+            <param name="index"> index</param>
+        </member>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.RCEventsRecord.ReadDB(System.Data.IDataReader)">
+            <summary>
+            Read from database
+            </summary>
+            <param name="r"> Data reader</param>
+        </member>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.RCEventsRecord.ReadIM(OutSystems.NssAzureEventHubsSenderExtension2.RCEventsRecord)">
+            <summary>
+            Read from record
+            </summary>
+            <param name="r"> Record</param>
+        </member>
+        <member name="T:OutSystems.NssAzureEventHubsSenderExtension2.RLEventsRecordList">
+            <summary>
+            RecordList type <code>RLEventsRecordList</code> that represents a record list of
+             <code>Events</code>
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.RLEventsRecordList.#ctor">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.RLEventsRecordList.#ctor(System.Data.IDbTransaction)">
+            <summary>
+            Constructor with transaction parameter
+            </summary>
+            <param name="trans"> IDbTransaction Parameter</param>
+        </member>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.RLEventsRecordList.#ctor(System.Data.IDbTransaction,OutSystems.HubEdition.RuntimePlatform.Db.OSList{OutSystems.NssAzureEventHubsSenderExtension2.RCEventsRecord}.ReadDBMethodDelegate)">
+            <summary>
+            Constructor with transaction parameter and alternate read method
+            </summary>
+            <param name="trans"> IDbTransaction Parameter</param>
+            <param name="alternateReadDBMethod"> Alternate Read Method</param>
+        </member>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.RLEventsRecordList.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Constructor declaration for serialization
+            </summary>
+            <param name="info"> SerializationInfo</param>
+            <param name="context"> StreamingContext</param>
+        </member>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.RLEventsRecordList.NewList">
+            <summary>
+            Create as new list
+            </summary>
+            <returns>The new record list</returns>
         </member>
     </members>
 </doc>

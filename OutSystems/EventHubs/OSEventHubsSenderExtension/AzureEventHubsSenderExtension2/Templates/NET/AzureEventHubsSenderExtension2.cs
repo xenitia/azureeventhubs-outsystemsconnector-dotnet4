@@ -37,6 +37,16 @@ namespace OutSystems.NssAzureEventHubsSenderExtension2 {
 			// TODO: Write implementation for action
 		} // MssSenderSend3
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="ssBusinessEvent"></param>
+		/// <param name="ssmsgOut"></param>
+		public void MssSendMultiple(RLEventsRecordList ssBusinessEvent, out string ssmsgOut) {
+			ssmsgOut = "";
+			// TODO: Write implementation for action
+		} // MssSendMultiple
+
 	} // CssAzureEventHubsSenderExtension2
 
 } // OutSystems.NssAzureEventHubsSenderExtension2

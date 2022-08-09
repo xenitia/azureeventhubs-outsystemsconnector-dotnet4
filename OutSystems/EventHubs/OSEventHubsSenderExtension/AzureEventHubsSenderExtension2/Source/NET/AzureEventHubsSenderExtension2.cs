@@ -4,10 +4,34 @@ using System.Data;
 using OutSystems.HubEdition.RuntimePlatform;
 using OutSystems.RuntimePublic.Db;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace OutSystems.NssAzureEventHubsSenderExtension2 {
 
 	public class CssAzureEventHubsSenderExtension2: IssAzureEventHubsSenderExtension2 {
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="ssBusinessEvent"></param>
+		public void MssSendMultiple(RLEventsRecordList ssBusinessEvent, out string ssmsgOut) {
+			// TODO: Write implementation for action
+			ssmsgOut = "";
+
+			List<ClassLibraryOSTest.MFEventData> events = new List<ClassLibraryOSTest.MFEventData>();
+
+			foreach (RCEventsRecord e in ssBusinessEvent)
+			{
+				var MFe = new ClassLibraryOSTest.MFEventData();
+				MFe.BusinessEvent= e.ssSTEvents.ssBusinessEvent;
+				MFe.EventMessage = e.ssSTEvents.ssEventMessage;
+				events.Add(MFe);
+			}
+
+			ClassLibraryOSTest.Sender.SendMultiple(events, out ssmsgOut);
+
+		} // MssSendMultiple
+
 
 		/// <summary>
 		/// 
