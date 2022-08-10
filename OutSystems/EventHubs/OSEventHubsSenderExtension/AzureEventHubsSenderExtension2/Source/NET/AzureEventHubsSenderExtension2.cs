@@ -14,6 +14,26 @@ namespace OutSystems.NssAzureEventHubsSenderExtension2 {
 		/// 
 		/// </summary>
 		/// <param name="ssBusinessEvent"></param>
+		public void MssSendMultipleAsync(RLEventsRecordList ssBusinessEvent, int ssBatchSize) {
+			// TODO: Write implementation for action
+			List<ClassLibraryOSTest.MFEventData> events = new List<ClassLibraryOSTest.MFEventData>();
+
+			foreach (RCEventsRecord e in ssBusinessEvent)
+			{
+				var MFe = new ClassLibraryOSTest.MFEventData();
+				MFe.BusinessEvent = e.ssSTEvents.ssBusinessEvent;
+				MFe.EventMessage = e.ssSTEvents.ssEventMessage;
+				events.Add(MFe);
+			}
+
+			ClassLibraryOSTest.Sender.SendMultipleAsync(events, ssBatchSize);
+		} // MssSendMultipleAsync
+
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="ssBusinessEvent"></param>
 		public void MssSendMultiple(RLEventsRecordList ssBusinessEvent, out string ssmsgOut) {
 			// TODO: Write implementation for action
 			ssmsgOut = "";

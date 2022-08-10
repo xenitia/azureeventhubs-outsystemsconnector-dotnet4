@@ -4,6 +4,12 @@
         <name>OutSystems.NssAzureEventHubsSenderExtension2</name>
     </assembly>
     <members>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.CssAzureEventHubsSenderExtension2.MssSendMultipleAsync(OutSystems.NssAzureEventHubsSenderExtension2.RLEventsRecordList,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="ssBusinessEvent"></param>
+        </member>
         <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.CssAzureEventHubsSenderExtension2.MssSendMultiple(OutSystems.NssAzureEventHubsSenderExtension2.RLEventsRecordList,System.String@)">
             <summary>
             
@@ -60,6 +66,13 @@
             </summary>
             <param name="ssBusinessEvent"></param>
             <param name="ssmsgOut"></param>
+        </member>
+        <member name="M:OutSystems.NssAzureEventHubsSenderExtension2.IssAzureEventHubsSenderExtension2.MssSendMultipleAsync(OutSystems.NssAzureEventHubsSenderExtension2.RLEventsRecordList,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="ssBusinessEvent"></param>
+            <param name="ssBatchSize"></param>
         </member>
         <member name="T:OutSystems.NssAzureEventHubsSenderExtension2.STEventsStructure">
             <summary>
