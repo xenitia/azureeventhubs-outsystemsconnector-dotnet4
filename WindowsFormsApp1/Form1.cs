@@ -38,11 +38,26 @@ namespace WindowsFormsApp1
 
         async private void button2_Click(object sender, EventArgs e)
         {
-            Task<string> rsTask= AzureEventHubs.OutSystemsConnector.DotNet4.Sender.Send2("Hello Azure Event Hubs!");
+             Task<string> rsTask =  AzureEventHubs.OutSystemsConnector.DotNet4.Sender.Send2("Hello Azure Event Hubs!");
 
            // string rs= await rsTask;
 
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            List<ClassLibraryOSTest.MFEventData> events = new List<ClassLibraryOSTest.MFEventData>();
+
+            for (var i=0; i<1000; ++i)
+            {
+                var MFe = new ClassLibraryOSTest.MFEventData();
+                MFe.BusinessEvent = $"Business Event{i}";
+                MFe.EventMessage = $"Event Message {i}";
+                events.Add(MFe);
+            }
+
+            ClassLibraryOSTest.Sender.SendMultipleAsync(events, 100);
         }
     }
 }
