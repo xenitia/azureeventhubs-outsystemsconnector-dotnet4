@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibraryOSTest", "Class
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{36EC819F-A310-41F6-99D0-BEBEBEBB235A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventHubReceiverMT", "EventHubReceiverMT\EventHubReceiverMT.csproj", "{173F6B28-739C-4A40-BA1A-B35D0AF1358C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskThreadingAndCancellation", "TaskThreadingAndCancellation\TaskThreadingAndCancellation.csproj", "{111BD008-3ED6-4039-9D5C-C1A746417BF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{36EC819F-A310-41F6-99D0-BEBEBEBB235A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36EC819F-A310-41F6-99D0-BEBEBEBB235A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36EC819F-A310-41F6-99D0-BEBEBEBB235A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{173F6B28-739C-4A40-BA1A-B35D0AF1358C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{173F6B28-739C-4A40-BA1A-B35D0AF1358C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{173F6B28-739C-4A40-BA1A-B35D0AF1358C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{173F6B28-739C-4A40-BA1A-B35D0AF1358C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{111BD008-3ED6-4039-9D5C-C1A746417BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{111BD008-3ED6-4039-9D5C-C1A746417BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{111BD008-3ED6-4039-9D5C-C1A746417BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{111BD008-3ED6-4039-9D5C-C1A746417BF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

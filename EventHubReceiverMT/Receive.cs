@@ -16,7 +16,7 @@ using System.Threading;
 
 namespace AzureEventHubs.OutSystemsConnector.DotNet4
 {
-    internal class EventHubReceiver
+    public class EventHubReceiverMT
     {
 
         static SecretClient client = new SecretClient(vaultUri: new Uri("https://eventhubsnskeyvault.vault.azure.net/"), credential: new DefaultAzureCredential());
@@ -31,14 +31,37 @@ namespace AzureEventHubs.OutSystemsConnector.DotNet4
         static String consumerGroup = EventHubConsumerClient.DefaultConsumerGroupName;
         static int maximumBatchSize = 1000;
 
+        bool IsInitialised = false;
+        
+        public EventHubReceiverMT() { }
 
-        async static Task Main(string[] args)
+        void Init()
         {
+            if (!IsInitialised)
+            {
+                secret = client.GetSecret("eventHubsConnectionString");
+                eventHubsConnectionString = secret.Value;
+                secret = client.GetSecret("storageConnectionString");
+                storageConnectionString = secret.Value;
 
-            secret = client.GetSecret("eventHubsConnectionString");
-            eventHubsConnectionString = secret.Value;
-            secret = client.GetSecret("storageConnectionString");
-            storageConnectionString = secret.Value;
+                IsInitialised = true;
+            }
+        }
+
+        //public async Task EventProcessingTask(int taskNum, CancellationToken ct)
+        //{ 
+        
+        //}
+
+
+        //public async static Task StartProcessingEvents(int taskNum, CancellationToken ct)
+        public async Task StartProcessingEvents(int taskNum, CancellationToken ct)
+        {
+            Console.WriteLine($"TaskIndex {taskNum} TaskId {Task.CurrentId} Not going to get here - Finished");
+
+            Init();
+
+            //taskNum = Task.CurrentId;
 
             BlobContainerClient storageClient = new BlobContainerClient(storageConnectionString, blobContainerName);
 
@@ -47,25 +70,27 @@ namespace AzureEventHubs.OutSystemsConnector.DotNet4
                 maximumBatchSize,
                 consumerGroup,
                 eventHubsConnectionString,
-                eventHubName);
+                eventHubName,
+                (int)Task.CurrentId);
 
-            CancellationTokenSource cancellationSource = new CancellationTokenSource();
-            cancellationSource.CancelAfter(TimeSpan.FromSeconds(30));
+            //CancellationTokenSource cancellationSource = new CancellationTokenSource();
+            //cancellationSource.CancelAfter(TimeSpan.FromSeconds(30));
 
             // Starting the processor does not block when starting; delay
             // until the cancellation token is signaled.
 
             try
             {
-                await processor.StartProcessingAsync(cancellationSource.Token);
-                //await Task.Delay(Timeout.Infinite, cancellationSource.Token);
-                await Task.Delay(TimeSpan.FromSeconds(30));
-                Console.WriteLine("Not going to get here - Finished");
+                await processor.StartProcessingAsync(ct);
+                //await processor.StartProcessingAsync(cancellationSource.Token);
+                await Task.Delay(Timeout.Infinite, ct);
+                //await Task.Delay(TimeSpan.FromSeconds(30));
+                Console.WriteLine($"TaskIndex {taskNum} TaskId {Task.CurrentId}  Not going to get here - Finished");
 
             }
             catch (TaskCanceledException)
             {
-                Console.WriteLine("Got here - Finished");
+                Console.WriteLine($"TaskIndex {taskNum} TaskId {Task.CurrentId}  Got here - Finished");
 
                 // This is expected if the cancellation token is
                 // signaled.
@@ -75,7 +100,7 @@ namespace AzureEventHubs.OutSystemsConnector.DotNet4
                 // Stopping may take up to the length of time defined
                 // as the TryTimeout configured for the processor;
                 // By default, this is 60 seconds.
-                Console.WriteLine("StopProcessingAsync - Finally");
+                Console.WriteLine($"TaskIndex {taskNum} TaskId {Task.CurrentId}  StopProcessingAsync - Finally");
 
                 await processor.StopProcessingAsync();
             }
